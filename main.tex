@@ -1,0 +1,393 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{example}{Example}
+
+\newcommand{\R}{\mathrm{R}}
+\newcommand{\FR}{\mathbb{R}}
+\newcommand{\FC}{\mathbb{C}}
+\newcommand{\FQ}{\mathbb{Q}}
+\newcommand{\FZ}{\mathbb{Z}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\usepackage{xcolor}
+
+\begin{document}
+
+
+\section{Introduction}
+
+
+Historically algebra was created to understand zeros of
+polynomial equations. Along the way the importance of various
+system of numbers and their symmetries became evident.
+The importance of symmetries of objects in other parts of
+math and other sciences turned it into an important part of
+algebra which has connections with geometry, analysis,
+combinatorics, topology, etc. Symmetries of objects are studied
+in group theory, which is the main subject of our course.
+
+We start by recalling some of the basic concepts from
+set theory and congruence arithmetic.
+
+\paragraph{Equivalence Relation}
+Let $X$ be a non-empty set. A relation over $X$ is a subset
+$\R$ of $X\times X$. If $(x,y)\in\R$, we say $x$ is $\R$-related
+to $y$ and write $x\R y$. Suppose $\R$ is a relation over $X$.
+Then:
+\begin{itemize}
+    \item $\R$ is called reflexive if $\forall x\in X$, $x\R x$.
+    \item $\R$ is called symmetric if $\forall x,y\in X$, $x\R y\Rightarrow y\R x$.
+    \item $\R$ is called transitive if $\forall x,y\in X$, $x\R y,y\R z\Rightarrow x\R z$.
+\end{itemize}
+
+$\R$ is called an equivalent relation if $\R$ is reflexive, symmetric
+and transitive.
+
+Equivalent relations are essentially about equality with
+respect to certain measurment. The following example
+is an important indication of this concept:
+
+\begin{example}
+    Suppose $X$ and $Y$ are two non-empty sets and $f:X\to Y$
+    is a function. Let $\sim$ be the following relation over $X$:
+    \[\forall x_1,x_2\in X,x_1\sim x_2\Longleftrightarrow f(x_1)=f(x_2).\]
+    Then $\sim$ is an equivalent relation.
+\end{example}
+
+Alternatively equivalent relations partition $X$ into subsets
+that share the same property. For instance in the previous example
+the shared property is having the same value under the function $f$.
+Let's recall that $P$ is called a partition of a non-empty set
+$X$, if 
+\begin{itemize}
+    \item $P$ consists of non-empty subsets of $X$, (subsets)
+    \item $A,B\in P$ and $A\neq B\Rightarrow A\cap B=\varnothing$, (disjoint)
+    \item $\forall x\in X$, $\exists A\in P$ such that $x\in A$. (covering)
+\end{itemize}
+
+Suppose $P$ is a partition of $X$. Then we get a classification function
+from $X$ to $P$: $X\to P$, $x\mapsto [x]_P$ where $[x]_P$ is the 
+unique element of $P$ which contains $x$. Notice that because of
+the covering condition $x$ is contained in some element of $P$,
+and because of the disjointness condition $x$ is in a unique
+element of $P$. By the previous example, $x\sim y\Leftrightarrow [x]_P=[y]_P$
+is an equivalent relation. So we can obtain the following lemma:
+
+\begin{lemma}
+    Suppose $P$ is a partition of a non-empty set $X$.
+    For $x,y\in X$, $x\sim y$ if $x$ and $y$ are in the same element
+    of $P$. Then $\sim$ is an equivalent relation.
+\end{lemma}
+
+\begin{proof}
+    For $x\in X$, let $[x]_P$ be the unique element of $P$
+    which contains $x$. So $x\mapsto[x]_P$ is a function from $X$
+    to $P$. By the previous example, $x\sim y\Leftrightarrow[x]_P=[y]_P$
+    is an equivalent relation over $X$. Notice that this means 
+    $x\sim y$ exactly when $x$ and $y$ are in the same element of $P$.
+\end{proof}
+
+Starting with an equivalent relation $\sim$ over a non-empty
+set $X$, we can partition $X$ with respect to $\sim$,
+as we show next.
+
+For $x\in X$, let $[x]:=\{y\in X\mid y\sim x\}$ (all the elements
+that are $\sim$-related to $x$) We call $[x]$ the equivalent class
+of $x$ with respect to $\sim$. When $x\sim y$, we say $x$ is equivalent to
+$y$ with respect to $\sim$.
+
+\begin{proposition}
+    Suppose $\sim$ is an equivalent relation over a non-empty
+    set $X$. Then $\{[x]\mid x\in X\}$ is a partition of $X$.
+\end{proposition}
+
+\begin{lemma}
+    $x\sim y\Leftrightarrow [x]=[y]$.
+\end{lemma}
+
+\section{Multiplicative structure of integers mod $n$}
+Here we want to investigate what elements of $\mathbb{Z}_n$
+have multiplicative inverse.
+\begin{definition}
+    We say $[a]_n\in\mathbb{Z}_n$ has a \textcolor{blue}{multiplicative inverse}
+    if $[a]_n\cdot [a']_n=[1]_n$ for some $[a']_n\in\mathbb{Z}_n$. We say $[a]_n$
+    is \textcolor{blue}{a unit of $\mathbb{Z}_n$} if it has a multiplicative 
+    inverse. The set of all the units of $\mathbb{Z}_n$ is denoted
+    by $\mathbb{Z}_n^*$.
+\end{definition}
+
+\begin{theorem}
+    Suppose $n\in\mathbb{Z}$ and $n\geq 2$. Then
+    \[\mathbb{Z}_n^*=\{[a]_n\mid \gcd(a,n)=1\}.\]
+    Moreover $|\mathbb{Z}_n^*|=|\{a\in\mathbb{Z}\mid 1\leq a\leq n,\gcd(a,n)=1\}|$.
+
+    (The left hand side of the above equality is denoted
+    by $\phi(n)$ and it is called \textbf{Euler's phi function}.)
+\end{theorem}
+
+\begin{proof}
+    ($\subset$) Suppose $[a]_n\in\mathbb{Z}_n^*$. Then $[a]_n[a']_n=[1]_n$
+    for some $a'\in\mathbb{Z}$. Hence $[aa']_n=[1]_n$ which implies
+    that $aa'\equiv 1\pmod 1$. (Earlier we proved that $b\equiv b'\pmod n$
+    implies $\gcd(b,n)=\gcd(b',n)$). Hence $\gcd(aa',n)=\gcd(1,n)=1$.
+    Therefore $\gcd(a,n)=1$.
+
+    ($\supset$) Suppose $\gcd(a,n)=1$. Then $1=ra+sn$
+    for some $r,s\in\mathbb{Z}$. Since $ra+sn=1$, we obtain that
+    \[ra\equiv 1\pmod n\]
+    This implies that $[ra]_n=[1]_n$, and so 
+    $[r]_n[a]_n=[1]_n$. Therefore $[a]_n\in\mathbb{Z}_n$.
+\end{proof}
+
+\section{Group}
+Group theory is (mostly) about symmetrices of objects.
+In some interesting examples in geometry, combinatorics,
+or even chemistry, knowing the symmetrices uniquely 
+determine the object. One can say that at a meta-level,
+the whole mathematics (and in general sciences) is about
+finding patterns as we want to reduce the amount of
+data that we need to store. (Lowering the complexity
+of the objects that we are studying.)
+
+We start with an axiomatic definition of groups, and then 
+give the relation with symmetrices.
+\begin{definition}
+    Suppose $G$ is a non-empty set and $(g_1,g_2)\mapsto g_1\cdot g_2$
+    is an operator on $G$ (that means it is a function from $G\times G$
+    to $G$). We say $(G,\cdot)$ (or simply $G$) is a group if the 
+    following properties hold.
+    \begin{itemize}
+        \item (Associative) $\forall g_1,g_2,g_3\in G$, $g_1\cdot (g_2\cdot g_3)=(g_1\cdot g_2)\cdot g_3$
+        \item (Neutral element) $\exists e\in G$, $\forall g\in G$, $g\cdot e=e\cdot g=g$
+        \item (Inverse) $\forall g\in G$, $\exists g'\in G$, $g\cdot g'=g'\cdot g=e$, where $e$ is a neutral element.
+    \end{itemize}
+\end{definition}
+
+We have already seen some exmaples of groups.
+\begin{example}
+    $(\mathbb{Z},+)$, $(\mathbb{Q},+)$, $(\FR,+)$ and $(\mathbb{C},+)$ are groups.
+\end{example}
+
+\begin{example}
+    $(\mathbb{Q}\backslash\{0\},\cdot)$, $(\FR\backslash\{0\},\cdot)$, and 
+    $(\mathbb{C}\backslash\{0\},\cdot)$ are groups.
+\end{example}
+
+\begin{example}
+    For every integer $n\geq 2$, $(\mathbb{Z}_n,+)$ is a group.
+\end{example}
+
+\begin{example}
+    For every integer $n\geq 2$, $(\mathbb{Z}_n^*,\cdot)$ is a group.
+\end{example}
+
+In some of the examples, we showed the uniqueness
+of a neutral element when it exists. Next we show
+this property in a general setting.
+
+\begin{lemma}
+    Suppose $G$ is a non-empty set, and $(g_1,g_2)\mapsto g_1\cdot g_2$
+    is an operation. Suppose $e,e'\in G$ are neutral
+    elements of $\cdot$. Then $e=e'$. In particular,
+    in a group, there is a unique neutral element.
+\end{lemma}
+
+\begin{proof}
+    Since $e$ is a neutral element, $e\cdot e'=e'$.
+    Because $e'$ is a neutral element, $e\cdot e'=e$.
+    Altogether we have 
+    \[e'=e\cdot e'=e'.\qedhere\]
+\end{proof}
+
+Next we show the uniqueness of inverse in a group.
+
+\begin{lemma}
+    Suppose $(G,\cdot)$ is a group. Then every element
+    $g$ has a unique inverse. That means if $g_1,g_2$
+    are inverses of $g$, then $g_1=g_2$
+\end{lemma}
+
+
+\section{Homomorphism and subgroups}
+
+Whenever we learn about a new structure in mathematics, we 
+should study the functions between these objects that preserve
+their properties. These functions are often called homomorphism.
+(In a very vague sense homomorphisms give us a global understanding
+of the objects.) Another point of view is from inside:
+we often study subsets that share the same property. For
+instance in linear algebra, the objects of interest are vector
+spaces, the homomorphisms are linear maps, and subsets that
+share the same properties are subspaces. We do the same for groups.
+
+\begin{definition}
+    Suppose $(G,\cdot)$ and $(H,*)$ are two groups.
+    Then a function $f:G\to H$ is called a group homomorphism if 
+    for every $g_1,g_2\in G$, $f(g_1\cdot g_2)=f(g_1)*f(g_2)$.
+\end{definition}
+
+\begin{definition}
+    Suppose $(G,\cdot)$ is a group. Then a subset $K$ of $G$
+    is called a subgroup of $G$ if $K$ is a group with respect to the
+    operation $\cdot$.
+\end{definition}
+
+Next we see a few examples.
+
+\begin{example}
+    Suppose $n$ is an integer and $n\geq 2$. Then
+    \[c_n:\mathbb{Z}\to\mathbb{Z}_n,c_n(a)=[a]_n\]
+    is a group homomorphism.
+\end{example}
+
+\begin{proof}
+    For $\forall a,b\in\mathbb{Z}$,
+    \[c_n(a+b)=[a+b]_n=[a]_n+[b]_n=c_n(a)+c_n(b).\qedhere\]
+\end{proof}
+
+\begin{example}
+    $f:\mathbb{Z}\to\mathbb{Z}$, $f(x)=-x$ is a group homomorphism.
+\end{example}
+
+\begin{proof}
+    For every $x,y\in\mathbb{Z}$,
+    \[f(x+y)=-(x+y)=(-x)+(-y)=f(x)+f(y).\qedhere\]
+\end{proof}
+
+\begin{example}
+    Let $\FR^{>0}$ be the set of positive
+    real numbers. Notice that $\FR^{>0}$ is a group
+    under multiplication. Then 
+    \[\ln:\FR^{>0}\to\FR\text{ is a group homomorphism.}\]
+\end{example}
+
+\begin{proof}
+    For every $x,y\in\FR^{>0}$,
+    \[\ln(x\cdot y)=\ln(x)+\ln(y).\qedhere\]
+\end{proof}
+
+\begin{example}
+    Let $N:\FC\backslash\{0\}\to\FR^{>0}$, $N(z)=|z|$. Then 
+    $N$ is a group homomorphism.
+\end{example}
+
+\begin{proof}
+    For every $z\in\FC\backslash\{0\}$, $|z|\in\FR^{>0}$
+    and $|z_1\cdot z_2|=|z_1|\cdot|z_2|$.
+\end{proof}
+
+\begin{example}
+    Let $GL_n(\FR)$ be the set of invertible $n\times n$
+    real matrices. From linear algebra we know that matrix
+    multiplication is associative, product of two
+    invertible $n\times n$ matrices is invertible, for
+    every $a$ in $GL_n(\FR)$, $a\cdot I_n=I_n\cdot a=a$
+    where $I_n$ is the identity matrix.
+    So $(GL_n(\FR),\cdot)$ is a group. Let $\theta:GL_n(\FR)\to GL_n(\FR)$,
+    $\theta(x)=(x^t)^{-1}$ where $x^t$ is the transpose of $x$. Then
+    $\theta$ is a group homomorphism.
+\end{example}
+
+\begin{proof}
+    \[\theta(x\cdot y)=((x\cdot y)^t)^{-1}=(y^t\cdot x^t)^{-1}=(x^t)^{-1}\cdot(y^t)^{-1}=\theta(x)\cdot\theta(y).\qedhere\]
+\end{proof}
+
+\begin{example}
+    Suppose $(G,\cdot)$ is a group. Then $f:G\to G$, $f(g)=g^{-1}$
+    is a group homomorphism if and only if $G$ is abelian.
+\end{example}
+
+\begin{proof}
+    ($\Rightarrow$) For every $g,h\in G$, $f(g\cdot h)=f(g)\cdot f(h)$.
+    Then 
+    \begin{equation}
+        (g\cdot h)^{-1}=g^{-1}\cdot h^{-1}\Rightarrow h^{-1}\cdot g^{-1}=g^{-1}\cdot h^{-1}\tag{(I)}
+    \end{equation}
+    For $x,y\in G$, let $g=x^{-1}$ and $h=y^{-1}$ in (I). Then
+    we obtain $(y^{-1})^{-1}\cdot (x^{-1})^{-1}=(x^{-1})^{-1}\cdot(y^{-1})^{-1}$.\
+    Since $(x^{-1})^{-1}=x$ and $(y^{-1})^{-1}=y$, we conclude
+    $y\cdot x=x\cdot y$. Therefore $G$ is abelian.
+
+    ($\Leftarrow$) $f(g\cdot h)=(g\cdot h)^{-1}=h^{-1}\cdot g^{-1}=f(h)\cdot f(g)=f(g)\cdot f(h)$.
+\end{proof}
+
+\begin{example}
+    Suppose $(G,\cdot)$ is a group and $g\in G$. Let
+    \[c_g:G\to G,c_g(x):=g\cdot x\cdot g^{-1}.\]
+    Then $c_g$ is a group homomorphism.
+\end{example}
+
+\begin{proof}
+    For $x,y\in G$, we have to show that 
+    \[c_g(x\cdot y)=c_g(x)\cdot c_g(y).\]
+    We have $c_g(x\cdot y)=g\cdot x\cdot y\cdot g^{-1}$ and 
+    \[\begin{split}
+        c_g(x)\cdot c_g(y)
+        &=(g\cdot x\cdot g^{-1})\cdot(g\cdot y\cdot g^{-1})\\
+        &=g\cdot x\cdot (g^{-1}\cdot g)\cdot y\cdot g^{-1}\\
+        &=g\cdot x\cdot e_G\cdot y\cdot g^{-1}\\
+        &=g\cdot x\cdot y\cdot g^{-1}
+    \end{split}\]
+    Therefore $c_g(x\cdot y)=c_g(x)\cdot c_g(y)$.
+\end{proof}
+
+\begin{example}
+    Suppose $(G,\cdot)$ is a group and $g\in G$. Then
+    \[f:\mathbb{Z}\to G,f(n):=g^n\text{ is a group homomorphism.}\]
+\end{example}
+
+\begin{proof}
+    For every $m,n\in\mathbb{Z}$,
+    \[f(m+n)=g^{m+n}=g^m\cdot g^n=f(m)\cdot f(n).\qedhere\]
+\end{proof}
+
+\begin{example}
+    $\FZ$ is a subgroup of $(\FQ,+)$.
+    $\FQ$ is a subgroup of $(\FR,+)$.
+    $\FR$ is a subgroup of $(\FC,+)$.
+\end{example}
+
+\begin{example}
+    $2\FZ:=\{2k\mid k\in\FZ\}$ is a subgroup of $(\FZ,+)$.
+\end{example}
+
+\begin{proof}
+    For every $k,l\in\FZ$, $2k+2l=2(k+l)\in2\FZ$, and so $+$
+    defines an operation on $2\FZ$.
+    \begin{itemize}
+        \item $+$ is associative.
+        \item 
+    \end{itemize}
+\end{proof}
+
+
+\begin{lemma}[Subgroup criterion]
+    Suppose $(G,\cdot)$ is a group. A subset $H$ of $G$
+    is a subgroup if it is not empty and for 
+    every $x,y\in H$, $x\cdot y^{-1}\in H$.
+\end{lemma}
+
+
+Next we explore some of the connections between
+group homomorphisms and subgroups. Suppose $(G,\cdot)$
+and $(H,\cdot)$ are two groups, and $f:G\to H$
+is a group homomorphism. Let $\Im(f)$ be the image
+of $f$, that is $\Im(f):=\{f(g)\mid g\in G\}$,
+and similar to linear algebra let the kernel of $f$ be 
+\[\ker(f):=\{g\in G\mid f(g)=e_H\},\]
+where $e_H$ is the neutral element of $H$.
+
+\begin{theorem}
+    Suppose $(G,\cdot)$ and $(H,\cdot)$ are groups,
+    and $f:G\to H$ is a group homomorphism.
+    Then $\Im(f)$ is a subgroup of $H$,
+    and $\ker(f)$ is a subgroup of $G$.
+\end{theorem}
+\end{document}

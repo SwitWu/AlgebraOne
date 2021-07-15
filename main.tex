@@ -112,6 +112,49 @@ $y$ with respect to $\sim$.
     $x\sim y\Leftrightarrow [x]=[y]$.
 \end{lemma}
 
+\begin{proof}[Proof of lemma]
+    ($\Leftarrow$) We want to show $[x]=[y]\Rightarrow x\sim y$.
+    $x\sim x\Rightarrow x\in[x]\Rightarrow x\in[y]\Rightarrow x\sim y$.
+
+    ($\Rightarrow$) $x\sim y\Rightarrow[x]=[y]$.
+    To show equality of sets $[x]$ and $[y]$, it is necessary
+    and sufficient to prove $[x]\subset [y]$ and $[y]\subset [x]$.
+    Let's start by proving $[x]\subset [y]$.
+    $\forall z\in[x]$, $z\sim x$. Combining with $x\sim y$
+    we have $z\sim y$, so $z\in[y]$. Hence $[x]\subset [y]$.
+    This means we showed
+    \begin{equation}
+        x\sim y\Rightarrow [x]\subset [y].\tag{I}
+    \end{equation}
+    Notice that $x\sim y\Rightarrow y\sim x$. Therefore,
+    by (I), $[y]\subset [x]$.
+    \begin{equation}
+        x\sim y\Rightarrow y\sim x\Rightarrow [y]=[x].\tag{II}
+    \end{equation}
+    By (I) and (II), we have $x\sim y\Rightarrow [x]=[y]$.
+\end{proof}
+
+
+\begin{proof}[Proof of Proposition]
+    $\forall x\in X$, $x\sim x$. Thus $x\in[x]$.
+    This implies that $[x]$s are non-empty subsets and they cover
+    $X$. Next we show the disjointness property.
+    Suppose $z\in[x]\cap[y]$.
+    \[\left.\begin{array}[]{c}
+        z\in[x]\Rightarrow z\sim x\Rightarrow [z]=[x]\\
+        z\in[y]\Rightarrow z\sim y\Rightarrow [z]=[y]
+    \end{array}\right\}\Rightarrow [x]=[y].\]
+    We showed that $[x]\cap[y]\neq\varnothing\Rightarrow [x]=[y]$.
+    The contrapositive of this statement is 
+    \[[x]\neq [y]\Rightarrow[x]\cap[y]=\varnothing,\]
+    which is the disjointness property.
+\end{proof}
+
+
+Next we recall the congruence modulo $n$ relation which 
+plays an important role in our course.
+
+
 \section{Multiplicative structure of integers mod $n$}
 Here we want to investigate what elements of $\mathbb{Z}_n$
 have multiplicative inverse.

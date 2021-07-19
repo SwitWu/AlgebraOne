@@ -1,0 +1,184 @@
+\section{Congruences}
+
+
+The set of integers is denoted by $\FZ$. For $a,b\in\FZ$,
+we say $a$ divide $b$ and write $a\mid b$ if $b=ak$ for some
+integer $k$. Suppose $n$ is a non-zero integer, we say
+$a$ is congruent to $b$ modulo $n$ and write $a\equiv b\pmod n$
+or $a\modnequiv b$ if $n\mid a-b$.
+
+\begin{lemma}
+    $\modnequiv$ is an equivalent relation over $\FZ$.
+\end{lemma}
+
+As we have seen eariler, every equivalent relation
+gives us a partition and an equality function.
+For $a\in\FZ$, the equivalent class of $a$ with respect
+to $\modnequiv$ is called the mod-$n$ residue class of $a$
+and it is denoted by $[a]_n$. By the results that we 
+proved for equivalent relations we have that
+\begin{itemize}
+    \item $\{[a]_n\mid a\in\FZ\}$ is a partiton of $\FZ$
+    \item $a\modnequiv b\Leftrightarrow [a]_n=[b]_n$.
+\end{itemize}
+
+The partition $\{[a]_n\mid a\in\FZ\}$ is denoted by $\FZ_n$
+and it is called the set of integers modulo $n$.
+Notice that
+\[\begin{split}
+    b\in[a]_n
+    &\Longleftrightarrow b\modnequiv a\\
+    &\Longleftrightarrow n\mid b-a\\
+    &\Longleftrightarrow \exists k\in\FZ,b-a=nk\\
+    &\Longleftrightarrow \exists k\in\FZ,b=a+nk\\
+    &\Longleftrightarrow b\in\{a+nk\mid k\in\FZ\}
+\end{split}\]
+
+To understand the set $\FZ_n$ better,
+we recall the well-ordering principle and
+the long division. One of the important properties
+of positive integers is the well-ordering principle.
+
+\paragraph{The well-ordering principle}
+Every non-empty subset of the set $\FZ^{\geq 0}$
+of non-negative integers has a minimum.
+
+Using the well-ordering principle we can prove the
+division algorithm.
+
+\begin{theorem}[The division algorithm]
+    For every $a\in\FZ$, $b\in\FZ\backslash\{0\}$,
+    there is a unique pair $(q,r)$ of integers
+    such that $a=bq+r$ and $0\leq r<|b|$.
+\end{theorem}
+
+Suppose the pair $(q,r)$ is given in the long division
+algorithm. Then $q$ is called the quotient of $a$ divided by 
+$b$ and $r$ is called the remainder of $a$ divided by $b$.
+
+Using the long division algorithm we obtain that $\FZ_n$
+has $n$ elements.
+
+\begin{proposition}
+    Suppose $n$ is an integer more than $1$. Then 
+    \[\FZ_n=\{[0]_n,[1]_n,\dots,[n-1]_n\}\text{\quad and\quad}|\FZ_n|=n.\]
+\end{proposition}
+
+\begin{proof}
+    For every $a\in\FZ$, by the long division algorithm,
+    there are integers $q,r$ such that $a=nq+r$ and $0\leq r<n$.
+    $a=nq+r$ implies that $a\modnequiv r$. Hence $[a]_n=[r]_n$.
+    Thus $[a]_n\in\{[0]_n,[1]_n,\dots,[n-1]_n\}$. Next we show $[i]_n\neq [j]_n$
+    if $0\leq j<i\leq n-1$. Suppose to the contrary $[i]_n=[j]_n$.
+    \[\begin{split}
+        [i]_n=[j]_n&\Rightarrow i\modnequiv j\Rightarrow n\mid i-j \\
+                   &\Rightarrow i-j=nq\text{\quad for some integer }q
+    \end{split}\]
+    Notice that $0\leq j<i<n$ implies $0<i-j<n$, therefore $0<nq<n$.
+    Then $0<q<1$ which is a contradiction as there is no integer more than
+    $0$ and less than $1$. This completes the proof.
+\end{proof}
+
+The set of integers modulo $n$ have arithmetic operations similar to the set
+of integers. This can be viewed as a generalization of the fact that
+\begin{table}
+    \centering
+    \begin{tabular}{c|cc}
+        $+$ & even & odd \\
+        \hline
+        even & even & odd \\
+        odd & odd & even
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|cc}
+        $\cdot$ & even & odd \\
+        \hline
+        even & even & even \\
+        odd & even & odd
+    \end{tabular}
+\end{table}
+
+No matter what even or odd numbers we pick the above
+tables hold. So we can simply view the above tables as
+operations for the set of even numbers and the set of odd numbers.
+
+\begin{lemma}
+    The following are well-defined operations on $\FZ_n$:
+    \[[a]_n+[b]_n=[a+b]_n\text{\quad and\quad}[a]_n\cdot [b]_n=[a\cdot b]_n.\]
+\end{lemma}
+
+Before we go to the proof of this lemma, let's try to understand 
+what it says. Notice that $[a]_n$ is a set and $a\in[a]_n$.
+We say $a$ is a representative of this residue class.
+Recall that $[a]_n$ is the equivalence class of $a$
+with respect to the equivalent relation $\modnequiv$.
+From all the elements of $\FZ$ that are in the same class
+we are choosing a representative. We are doing the same for
+the residue class $[b]_n$. Then we are adding the chosen representatives
+in $\FZ$, and next we are considering the residue class of the
+sum (or product) of these representatives.
+A priori it is not clear why these operations do not depend
+on the choice of the representatives. This is an extremely
+important process. We will be using the same idea later when we define
+factor groups. Whenever you are using a representative from a 
+class and applying certain logic or operations to obtain
+a claim for the entire class, you have to be extra careful.
+You have to make sure that you are not ``stareotyping'' and
+your process is independent of the choice of a representative.
+
+\begin{proof}
+    Suppose $[a]_n=[a']_n$ and $[b]_n=[b']_n$. We have to show that
+    \[[a+b]_n=[a'+b'_n]\text{\quad and\quad}[a\cdot b]_n=[a'\cdot b']_n.\]
+    \begin{equation}
+        [a]_n=[a']_n\Rightarrow a\modnequiv a'\Rightarrow\exists k\in\FZ,a-a'=nk\tag{I}
+    \end{equation}
+    \begin{equation}
+        [b]_n=[b']_n\Rightarrow b\modnequiv b'\Rightarrow\exists l\in\FZ,b-b'=nl\tag{II}
+    \end{equation}
+    Therefore,
+    \[\begin{split}
+        (I)+(II)
+        &\Rightarrow (a-a')+(b-b')=nk+nl=n(k+l)\\
+        &\Rightarrow (a+b)-(a'+b')=n(k+l)\\
+        &\Rightarrow a+b\modnequiv a'+b'\\
+        &\Rightarrow [a+b]_n=[a'+b']_n.
+    \end{split}\]
+
+    Next we want to show $[a\cdot b]_n=[a'\cdot b']_n$. Notice
+    that 
+    \[\begin{split}
+        [a\cdot b]_n=[a'\cdot b']_n
+        &\Leftrightarrow a\cdot b\modnequiv a'\cdot b'\\
+        &\Leftrightarrow a\cdot b-a'\cdot b'\text{ is a multiple of }n
+    \end{split}\]
+    We change one factor at a time. This is similar to how we show
+    the product rule in caculus.
+    \[\begin{split}
+        a\cdot b-a'\cdot b'
+        &=a\cdot b-a'\cdot b+a'\cdot b-a'\cdot b'\\
+        &=(a-a')\cdot b+a'\cdot (b-b')\\
+        &=(nk)\cdot b+a'\cdot(nl)\\
+        &=n\cdot (kb+a'l).
+    \end{split}\]
+    Therefore $a\cdot b\modnequiv a'\cdot b'$, so $[a\cdot b]_n=[a'\cdot b']_n$.
+\end{proof}
+
+Next we see that the above operations on $\FZ_n$
+satisfy associativity and distribution. Moreover
+$\FZ_n$ has neutral elements with respect to both $+$ and $\cdot$.
+Every element has an additive inverse. Later we will see
+what elements have multiplicative inverse.
+
+\begin{proposition}
+    For every $[a]_n$, $[b]_n$, $[c]_n\in\FZ_n$
+    we have 
+    \begin{description}
+        \item[Associative] \[[a]_n+([b]_n+[c]_n)=([a]_n+[b]_n)+[c]_n\] \[[a]_n\cdot([b]_n\cdot[c]_n)=([a]_n\cdot [b]_n)\cdot[a]_n\]
+        \item[Neutral element] \[[a]_n+[0]_n=[0]_n+[a]_n=[a]_n\] \[[a]_n\cdot [1]_n=[1]_n\cdot [a]_n=[a]_n\]
+        \item[Additive inverse]  \[[a]_n+[-a]_n=[-a]_n+[a]_n=[0]_n\]
+        \item[Commutative] \[[a]_n+[b]_n=[b]_n+[a]_n\] \[[a]_n\cdot [b]_n=[b]_n\cdot [a]_n\]
+        \item[Distributive] \[[a]_n\cdot([b]_n+[c]_n)=[a]_n\cdot [b]_n+[a]_n\cdot [c]_n\] \[([b]_n+[c]_n)\cdot [a]_n=[b]_n\cdot [a]_n+[c]_n\cdot [a]_n\] 
+    \end{description} 
+\end{proposition}
+All the claims are straightforward conclusions of similar
+properties for integers.

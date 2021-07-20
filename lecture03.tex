@@ -1,0 +1,164 @@
+\section{Greatest common divisor}
+
+To understand what elements of $\FZ_n$ have multiplicative
+inverse, we need to recall basic properties of greatest common
+divisor of integers. In particular, we recall Euclid's
+algorithm.
+
+The greatest common divisor of two non-zero integers $a$
+and $b$ is, as its name suggests,
+\[\max\{d\in\FZ\mid d\mid a,d\mid b\},\]
+and it is denoted by $\gcd(a,b)$.
+
+Notice that if $a$ is a non-zero integer and $d\mid a$,
+then $d\leq |a|$. Hence $\gcd(a,b)\leq\min\{|a|,|b|\}$
+if $a$, $b$ are two non-zero integers.
+
+\begin{lemma}
+    Suppose $a,b,d\in\FZ$. Then
+    \begin{itemize}
+        \item $d\mid a$, $d\mid b\Longrightarrow d\mid ra+sb$ for every $r,s\in\FZ$.
+        \item $d\mid b$, $d\mid a-b\Longrightarrow d\mid a$.
+    \end{itemize}
+\end{lemma}
+
+\begin{corollary}
+    Suppose $a,b$ are two positive integers. Then
+    \[\gcd(a,b)=\gcd(b,a-b).\]
+\end{corollary}
+
+\begin{proof}
+    We show that $d$ is a common divisor of $a$ and $b$
+    if and only if $d$ is a common divisor of $b$ and $a-b$.
+\end{proof}
+
+Next we point out the connection with Euclid's algorithm.
+
+\begin{lemma}
+    Suppose $n$ is a non-zero integer. If $a\modnequiv a'$, then
+    \[\gcd(a,n)=\gcd(a',n).\]
+\end{lemma}
+
+\begin{proof}
+    Since $a\modnequiv a'$, $a-a'=nk$ for some $k\in\FZ$.
+    \begin{equation}
+        d\mid a\text{ and }d\mid a'\Rightarrow d\mid kn+1a'\Rightarrow d\mid a\tag{I}
+    \end{equation}
+    \begin{equation}
+        d\mid n\text{ and }d\mid a\Rightarrow d\mid 1a+(-k)n\Rightarrow d\mid a'\tag{II}
+    \end{equation}
+    By (I), (II), $\{d\in\FZ\mid d\mid n,d\mid a\}=\{d\in\FZ\mid d\mid n,d\mid a'\}$.
+    Hence $\gcd(n,a)=\gcd(n,a')$.
+\end{proof}
+Euclid's algorithm is a fast way of finding the gcd of two
+positive integers. Similar to the pictorial method,
+Euclid's algorithm gives us a process through which the gcd 
+stays the same, but we get smaller and smaller pairs.
+
+Suppose $a\geq b$ are two positive integers. Let
+$a_0:=a$, $a_1:=b$. We divide $a_0$ by $a_1$, that is
+$a_0=a_1q_1+a_2$. Then $a_0\overset{a_1}{\equiv}a_2$,
+ans so by the above lemma, $\gcd(a_0,a_1)=\gcd(a_1,a_2)$.
+Next we divide $a_1$ by $a_2$ if $a_2\neq 0$,
+and repeat this process till the remainder is $0$.
+\[\begin{matrix}
+    a_0=a_1q_1+a_2, & \gcd(a_0,a_1)=\gcd(a_1,a_2), & a_1>a_2 \\
+    a_1=a_2q_2+a_3, & \gcd(a_1,a_2)=\gcd(a_2,a_3), & a_2>a_3 \\
+    \vdots          & \vdots                       & \vdots \\
+    a_{n-1}=a_nq_n+0,&\gcd(a_{n-1},a_n)=a_n,       & a_n>0
+\end{matrix}\]
+Hence $a_0\geq a_1>a_2>\cdots>a_n>0$ and $a_n=\gcd(a_0,a_1)=\gcd(a,b)$.
+Notice that, for every $0\leq i<n$,
+\[\begin{pmatrix}
+    0 & 1 \\ 1 & -q_i
+\end{pmatrix}\begin{pmatrix}
+    a_{i-1} \\ a_i
+\end{pmatrix}=\begin{pmatrix}
+    a_i \\ a_{i-1}-a_iq_i
+\end{pmatrix}=\begin{pmatrix}
+    a_i \\ a_{i+1}
+\end{pmatrix}.\]
+Hence
+\[\begin{pmatrix}
+    a_n \\ 0
+\end{pmatrix}=\begin{pmatrix}
+    0 & 1 \\ 1 & -q_n
+\end{pmatrix}\begin{pmatrix}
+    0 & 1 \\ 1 & -q_{n-1}
+\end{pmatrix}\cdots\begin{pmatrix}
+    0 & 1 \\ 1 & -q_1
+\end{pmatrix}\begin{pmatrix}
+    a_0 \\ a_1
+\end{pmatrix}\]
+Therefore $a_n=ra_0+sa_1$ for some integers $r,s$.
+
+\begin{theorem}
+    For every non-zero integers $a$ and $b$, there are integers
+    $r$ and $s$ such that $\gcd(a,b)=ra+sb$.
+\end{theorem}
+
+\begin{proof}
+    We notice that $\gcd(a,b)=\gcd(|a|,|b|)$. Now claim
+    follows from the above process.
+\end{proof}
+
+Here we review basic properties of gcd of two integers.
+
+\begin{theorem}
+    Suppose $a,b$ are two non-zero integers. The if $\gcd(a,b)=d$,
+    then $\gcd\left(\frac{a}{d},\frac{b}{d}\right)=1$.
+\end{theorem}
+
+\begin{proof}
+    Since $\gcd(a,b)=d$, $d\mid a$ and $d\mid b$ and
+    \[d=ra+sb\text{ for some }r,s\in\FZ.\]
+    Hence $\frac{a}{d},\frac{b}{d}\in\FZ$ and $1=r\left(\frac{a}{d}\right)+s\left(\frac{b}{d}\right)$.
+
+    Let $d':=\gcd\left(\frac{a}{d},\frac{b}{d}\right)$. Then $d'\mid\frac{a}{d}$, $d'\mid\frac{b}{d}$,
+    and so $d'\mid r\left(\frac{a}{d}\right)+s\left(\frac{b}{d}\right)$. Therefore
+    $d'\mid 1$, which means $\gcd\left(\frac{a}{d},\frac{b}{d}\right)=1$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $a,b$ are two non-zero integers. If $d:=\gcd(a,b)$
+    and $d'$ is a common divisor of $a$ and $b$, then $d'\mid d$.
+\end{theorem}
+
+\begin{proof}
+    Since $d=\gcd(a,b)$, $d=ra+sb$ for some $r,s\in\FZ$.
+    Because $d'\mid a$ and $d'\mid b$, $d'\mid ra+sb$. Hence $d'\mid d$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $a,b,c$ are three non-zero integers.
+    Then $\gcd(ac,bc)=|c|\gcd(a,b)$.
+\end{theorem}
+
+\begin{proof}
+    Suppose $d:=\gcd(a,b)$. Then $d\mid a$ and $d\mid b$,
+    and so $d|c|$ divides $ac$ and $d|c|$ divides $bc$. Hence
+    \[d|c|\leq\gcd(ac,bc).\]
+    On the other hand, $d=\gcd(a,b)$ implies that $d=ra+sb$
+    for some $r,s\in\FZ$. Hence
+    \[d|c|=ra|c|+sb|c|=\pm(r(ac)+s(bc)).\]
+    Notice that $\gcd(ac,bc)$ divides every integer linear combination
+    of $ac$ and $bc$. Hence
+    \[\gcd(ac,bc)\mid d|c|.\]
+    Therefore $\gcd(ac,bc)=d|c|$, which means
+    \[\gcd(ac,bc)=|c|\gcd(a,b).\qedhere\]
+\end{proof}
+
+\begin{theorem}[Euclid's lemma]
+    For $a,b,c\in\FZ\backslash\{0\}$, if $\gcd(a,b)=1$ and $a\mid bc$,
+    then $a\mid c$.
+\end{theorem}
+
+\begin{proof}
+    Since $\gcd(a,b)=1$,
+    \[1=ra+sb\text{ for some }r,s\in\FZ.\]
+    Multiplying both sides of the above equality by $c$,
+    we obtain that
+    \[c=rc(a)+s(bc).\]
+    Since $a\mid a$ and $a\mid bc$, $a$ divides every integer linear
+    combination of $a$ and $bc$. Therefore $a\mid c$.
+\end{proof}

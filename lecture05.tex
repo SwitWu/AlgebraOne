@@ -1,0 +1,147 @@
+\section{Group}
+Group theory is (mostly) about symmetrices of objects.
+In some interesting examples in geometry, combinatorics,
+or even chemistry, knowing the symmetrices uniquely 
+determine the object. One can say that at a meta-level,
+the whole mathematics (and in general sciences) is about
+finding patterns as we want to reduce the amount of
+data that we need to store. (Lowering the complexity
+of the objects that we are studying.)
+
+We start with an axiomatic definition of groups, and then 
+give the relation with symmetrices.
+\begin{definition}
+    Suppose $G$ is a non-empty set and $(g_1,g_2)\mapsto g_1\cdot g_2$
+    is an operator on $G$ (that means it is a function from $G\times G$
+    to $G$). We say $(G,\cdot)$ (or simply $G$) is a group if the 
+    following properties hold.
+    \begin{itemize}
+        \item (Associative) $\forall g_1,g_2,g_3\in G$, $g_1\cdot (g_2\cdot g_3)=(g_1\cdot g_2)\cdot g_3$
+        \item (Neutral element) $\exists e\in G$, $\forall g\in G$, $g\cdot e=e\cdot g=g$
+        \item (Inverse) $\forall g\in G$, $\exists g'\in G$, $g\cdot g'=g'\cdot g=e$, where $e$ is a neutral element.
+    \end{itemize}
+\end{definition}
+
+We have already seen some exmaples of groups.
+\begin{example}
+    $(\mathbb{Z},+)$, $(\mathbb{Q},+)$, $(\FR,+)$ and $(\mathbb{C},+)$ are groups.
+\end{example}
+
+\begin{example}
+    $(\mathbb{Q}\backslash\{0\},\cdot)$, $(\FR\backslash\{0\},\cdot)$, and 
+    $(\mathbb{C}\backslash\{0\},\cdot)$ are groups.
+\end{example}
+
+\begin{example}
+    For every integer $n\geq 2$, $(\mathbb{Z}_n,+)$ is a group.
+\end{example}
+
+\begin{example}
+    For every integer $n\geq 2$, $(\mathbb{Z}_n^*,\cdot)$ is a group.
+\end{example}
+
+In some of the examples, we showed the uniqueness
+of a neutral element when it exists. Next we show
+this property in a general setting.
+
+\begin{lemma}
+    Suppose $G$ is a non-empty set, and $(g_1,g_2)\mapsto g_1\cdot g_2$
+    is an operation. Suppose $e,e'\in G$ are neutral
+    elements of $\cdot$. Then $e=e'$. In particular,
+    in a group, there is a unique neutral element.
+\end{lemma}
+
+\begin{proof}
+    Since $e$ is a neutral element, $e\cdot e'=e'$.
+    Because $e'$ is a neutral element, $e\cdot e'=e$.
+    Altogether we have 
+    \[e'=e\cdot e'=e'.\qedhere\]
+\end{proof}
+
+Next we show the uniqueness of inverse in a group.
+
+\begin{lemma}
+    Suppose $(G,\cdot)$ is a group. Then every element
+    $g$ has a unique inverse. That means if $g_1,g_2$
+    are inverses of $g$, then $g_1=g_2$
+\end{lemma}
+
+\begin{proof}
+    Here is the nice argument and as you can observe we only
+    need to assume that $g_1\cdot g=e_G$ and $g\cdot g_2=e_G$.
+    \[\begin{split}
+        g_1
+        &=g_1\cdot e_G\\
+        &=g_1\cdot (g\cdot g_2)\\
+        &=(g_1\cdot g)\cdot g_2\\
+        &=e_G\cdot g_2\\
+        &=g_2.
+    \end{split}\]
+    So the proof is finished.
+\end{proof}
+
+The inverse of $g\in G$ in a multiplicative notation
+is denoted by $g^{-1}$. When we are working with an additive
+notation $(G,+)$, the neutral element is denoted by $0$
+and the inverse of $g\in G$ is denoted by $-g$.
+
+\begin{lemma}
+    Suppse $(G,\cdot)$ is a group. Then for every $g,h$ in $G$,
+    we have $(g\cdot h)^{-1}=h^{-1}\cdot g^{-1}$.
+\end{lemma}
+
+\begin{proof}
+    Since inverse of an element is unique, it is enough to check
+    that $(g\cdot h)\cdot (h^{-1}\cdot g^{-1})=(h^{-1}\cdot g^{-1})\cdot (g\cdot h)=e_G$.
+    \[\begin{split}
+        (g\cdot h)\cdot (h^{-1}\cdot g^{-1})
+        &=g\cdot (h\cdot h^{-1})\cdot g^{-1}\\
+        &=(g\cdot e_G)\cdot g^{-1}\\
+        &=g\cdot g^{-1}=e_G.
+    \end{split}\]
+    Similarly,
+    \[\begin{split}
+        (h^{-1}\cdot g^{-1})\cdot (g\cdot h)
+        &=h^{-1}\cdot (g^{-1}\cdot g)\cdot h\\
+        &=h^{-1}\cdot e_G\cdot h\\
+        &=h^{-1}\cdot h=e_G.
+    \end{split}\]
+    Therefore $(g\cdot h)^{-1}=h^{-1}\cdot g^{-1}$.
+\end{proof}
+
+\begin{lemma}
+    For every $g\in G$, $(g^{-1})^{-1}=g$.
+\end{lemma}
+
+\begin{proof}
+    We have that $g^{-1}\cdot g=e_G$. Multiply both sides by $(g^{-1})^{-1}$
+    from left to get 
+    $\left((g^{-1})^{-1}\cdot g^{-1}\right)\cdot g=(g^{-1})^{-1}\cdot e_G=(g^{-1})^{-1}$.
+    Hence $e_G\cdot g=(g^{-1})^{-1}$, and so $g=(g^{-1})^{-1}$.
+\end{proof}
+
+\begin{lemma}[Cancellation law]
+    $g\cdot h=g\cdot h'\Rightarrow h=h'$. Similarly,
+    $h\cdot g=h'\cdot g\Rightarrow h=h'$.
+\end{lemma}
+
+\begin{proof}
+    $g\cdot h=g\cdot h'\Rightarrow g^{-1}\cdot (g\cdot h)=g^{-1}\cdot (g\cdot h')\Rightarrow h=h'$.
+    The other is similar.
+\end{proof}
+
+Suppose $(G,\cdot)$ is a group and $g\in G$. For a positive integer $n$,
+we let $g^n:=\underbrace{g\cdot\cdots\cdot g}_{n\text{ times}}$. For a negative 
+integer $n$, we let $g^n:=\underbrace{(g^{-1})\cdot\cdots\cdot (g^{-1})}_{-n\text{ times}}$.
+And we let $g^0=e_G$ (the neutral element).
+
+\begin{lemma}
+    For $n,m\in\FZ$, $(g^n)^m=g^{nm}$.
+\end{lemma}
+
+\begin{proof}
+    We will consider various cases depending on signs of $m$ and $n$.
+    Suppose $m$ and $n$ are positive. Then 
+    \[(g^n)^m=\underbrace{g^n\cdots g^n}_{m\text{ times}}=(\overbrace{g\cdots g}^{n\text{ times}})\cdot\cdots\cdot(\overbrace{g\cdots g}^{n\text{ times}})=\overbrace{g\cdots g}^{mn\text{ times}}=g^{mn}.\]
+    $m>0,n<0$
+\end{proof}
